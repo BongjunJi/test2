@@ -7,112 +7,140 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Mainfunction {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		boolean[][][] target;
-		boolean[][][] result1;
-		int score=0;
-		double accuracy=0;
-		int Misclassification=0;
+		
+		double[][] Input=new double[110000][26];
+		boolean[][] target=new boolean[110000][6];
+		boolean[][] target_sel;
+		Random generator = new Random();
+		int[] num;
+		double[][] testcase;
+		String string1= "Testcase";
+		String string2= ".csv";
+		String fn_target_sel;
+		String fn_testcase;
+		
+		//Date breaktime= new Date();
+		//DateFormat sdFormat=new SimpleDateFormat("yyyyMMdd");
+		//String tempdate;
 		int i=0;
 		int j=0;
 		try{
-					FileWriter fw=new FileWriter("Accuracy.csv");
-					int num_of_set;
-					int num_of_rand;
-					num_of_rand=Integer.parseInt(args[0]);
-					num_of_set=Integer.parseInt(args[1]);
-					target = new boolean[num_of_set][num_of_rand][6];
-					result1 = new boolean[num_of_set][num_of_rand][6];
-					for(int w=0;w<num_of_set;w++){
-						File csv1=new File("output"+(w+1)+".csv");
+				File csv6=new File("target.csv");
+			
+				BufferedReader br6 = new BufferedReader(new FileReader(csv6));
+				String line6="";
+				while((line6=br6.readLine())!=null){
+					String[] token6 = line6.split(",",-1);
+				
+					for(String output:token6){
 					
-						BufferedReader br1=new BufferedReader(new FileReader(csv1));
-						String line1="";
-						while((line1=br1.readLine())!=null){
-							String[] token1 =line1.split(",",-1);
-						
-							for(String output:token1){
-							
-								result1[w][j][i]=Boolean.parseBoolean(output);
-								//System.out.println("result"+"["+w+"]["+j+"]["+i+"]="+result1[w][j][i]);
-								i++;
-								
-							}
-							i=0;
-							j++;
-						}
-						br1.close();
-						
-						j=0;
-						w++;
+						target[j][i]=(Double.parseDouble(output)!=0);
+						i++;
 					}
-					
 					i=0;
-					j=0;
+					j++;
+				}
+				br6.close();
+
+				i=0;
+				j=0;
 				
-					for(int w=0;w<num_of_set;w++){
-						File csv2=new File("target_selected"+(w+1)+".csv");
+			i=0;
+
+				File csv=new File("data.csv");
 				
-						BufferedReader br2 = new BufferedReader(new FileReader(csv2));
-						String line2="";
-						while((line2=br2.readLine())!=null){
-							String[] token2 = line2.split(",",-1);
+				BufferedReader br=new BufferedReader(new FileReader(csv));
+				String line="";
+				while((line=br.readLine())!=null){
+					String[] token =line.split(",",-1);
+					
+					for(String output:token){
 						
-							for(String output:token2){
-							
-								target[w][j][i]=Boolean.parseBoolean(output);
-								//System.out.println("target"+"["+w+"]["+j+"]["+i+"]="+target[w][j][i]);
-								i++;
-							}
-							i=0;
-							j++;
+						Input[j][i]=Double.parseDouble(output);
+						i++;
 						}
-						br2.close();
-						j=0;
-						w++;
+						i=0;
+						j++;
 					}
+				br.close();
+				//Scanner scan = new Scanner(System.in);
+				int num_of_rand;
+				int num_of_set;
+				num_of_rand=Integer.parseInt(args[0]);
+				num_of_set=Integer.parseInt(args[1]);
+				//System.out.println("한 파일 당 추출할 테스트 row의 갯수를 입력하세요. ");
+				//num_of_rand=scan.nextInt();
+				//System.out.println("몇개의 테스트셋을 생성할 지 개수를 입력하세요.");
+				//num_of_set=scan.nextInt();
+				num=new int[num_of_rand];
+				target_sel=new boolean[num_of_rand][6];
+				for(int r=0;r<num_of_set;r++){
+					
+					fn_target_sel="target_selected"+(r+1)+".csv";
+					FileWriter fw2=new FileWriter(fn_target_sel);
+					FileWriter fw=new FileWriter("testcase"+(r+1)+".csv");
+
+					
 		////////////////////////////////////////////////////
-					for(int x=0;x<num_of_set;x++){
-					for(int w=0;w<num_of_rand;w++)
+					for (int d=0; d<num_of_rand;d++)
 					{
+						num[d]=generator.nextInt(109753)+1;
+					}
 					
-						boolean diffChecker = false;
-						for(int s=0;s<6;s++)
-						{
-							if (target[x][w][s]!=result1[x][w][s]){
-								diffChecker = true;
-								break;
+					testcase=new double[num_of_rand*10][26];
+					
+					for (int d=0;d<num_of_rand;d++){
+						for(int w=0;w<10;w++){
+							for(int s=0;s<26;s++){
+								testcase[d*10+w][s]=Input[num[d]+w][s];
 							}
 						}
-						if (!diffChecker){
-							score++;
-						}
 					}
-					accuracy=(100.0*score)/(num_of_rand);
-					Misclassification=num_of_rand-score;
-					double accuracy_round;
-					accuracy_round=Double.parseDouble(String.format("%.2f", accuracy));
-					//System.out.println(accuracy_round);
-					//System.out.println(Misclassification);
-		
-					fw.append("Accuracy of testcase"+(x+1)+":");
-					fw.append(',');
-					fw.append(Double.toString(accuracy_round));
-					fw.append(',');
-					fw.append("Misclassification in testcase"+(x+1)+":");
-					fw.append(',');
-					fw.append(Integer.toString(Misclassification));
-					fw.append("\n");			
-					accuracy=0;
-					Misclassification=0;
-					score=0;
-					}
+	//////////////////////////////////////////////////////
 					
-					fw.close();
+					for(int w=0;w<num_of_rand;w++){
+						for(int s=0;s<6;s++){
+								target_sel[w][s]=target[(num[w]+11)][s];
+								}
+					}
+		
+		for(int x=0;x<num_of_rand;x++){
+			for(int z=0;z<6;z++){
+				fw2.append(Boolean.toString(target_sel[x][z]));
+				//System.out.println(x);
+				if(z!=5){
+				fw2.append(',');
+				}
+				else{
+				fw2.append("\n");
+				}
+			}
+		}
+		fw2.close();
+		for(int x=0;x<num_of_rand*10;x++){
+			for(int z=0;z<26;z++){
+				fw.append(Double.toString(testcase[x][z]));
+				if(z!=25){
+				fw.append(',');
+				}
+				else{
+				fw.append("\n");
+				}
+			}
+		}
+				fw.close();
+				/*if(r==Integer.parseInt(args[1])-1){
+					break;
+				}*/
+				}
+				
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}catch(IOException e){
