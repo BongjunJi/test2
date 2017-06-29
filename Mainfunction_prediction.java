@@ -152,11 +152,11 @@ public class Mainfunction {
 	
 							}	
 						}
-				PredictionModule A= new PredictionModule(NNInput, 10, 26, weight1, 2,260,weight2,b1,2,b2,6);//°´Ã¼ »ı¼º(Inputµ¥ÀÌÅÍ, Inputµ¥ÀÌÅÍÀÇ Çà Å©±â, Inputµ¥ÀÌÅÍÀÇ ¿­ Å©±â, weight1, weight1ÀÇ Çà Å©±â, weight1ÀÇ ¿­Å©±â,weight2, b1, b1ÀÇ Å©±â,b2)
+				PredictionModule A= new PredictionModule(NNInput, 10, 26, weight1, 2,260,weight2,b1,2,b2,6);//ê°ì²´ ìƒì„±(Inputë°ì´í„°, Inputë°ì´í„°ì˜ í–‰ í¬ê¸°, Inputë°ì´í„°ì˜ ì—´ í¬ê¸°, weight1, weight1ì˜ í–‰ í¬ê¸°, weight1ì˜ ì—´í¬ê¸°,weight2, b1, b1ì˜ í¬ê¸°,b2)
 //System.out.println(A.GetBREAKDOWN_FLAG_CURRENT());
-//fw.append(Boolean.toString(A.GetBREAKDOWN_FLAG_CURRENT()));//ÇöÀç ¼³ºñ °íÀå Áø´Ü
+//fw.append(Boolean.toString(A.GetBREAKDOWN_FLAG_CURRENT()));//í˜„ì¬ ì„¤ë¹„ ê³ ì¥ ì§„ë‹¨
 
-				result=A.GetBREAKDOWN_FLAG_FUTURE();// ¼³ºñ °íÀå ¿¹Ãø
+				result=A.GetBREAKDOWN_FLAG_FUTURE();// ì„¤ë¹„ ê³ ì¥ ì˜ˆì¸¡
 				//System.out.println(Arrays.toString(result));
 				
 				for(int z=0;z<6;z++){		
