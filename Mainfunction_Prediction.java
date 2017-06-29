@@ -154,7 +154,7 @@ public class Mainfunction {
 						}
 				PredictionModule A= new PredictionModule(NNInput, 10, 26, weight1, 2,260,weight2,b1,2,b2,6);//객체 생성(Input데이터, Input데이터의 행 크기, Input데이터의 열 크기, weight1, weight1의 행 크기, weight1의 열크기,weight2, b1, b1의 크기,b2)
 //System.out.println(A.GetBREAKDOWN_FLAG_CURRENT());
-//fw.append(Boolean.toString(A.GetBREAKDOWN_FLAG_CURRENT()));//현재 설비 고장 진단
+//fw.append(Boolean.toString(A.GetBREAKDOWN_FLAG_CURRENT()));//현재 설비 고장 진단<-
 
 				result=A.GetBREAKDOWN_FLAG_FUTURE();// 설비 고장 예측
 				//System.out.println(Arrays.toString(result));
