@@ -75,9 +75,9 @@ public class Mainfunction {
 				int num_of_set;
 				num_of_rand=Integer.parseInt(args[0]);
 				num_of_set=Integer.parseInt(args[1]);
-				//System.out.println("ÇÑ ÆÄÀÏ ´ç ÃßÃâÇÒ Å×½ºÆ® rowÀÇ °¹¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä. ");
+				//System.out.println("í•œ íŒŒì¼ ë‹¹ ì¶”ì¶œí•  í…ŒìŠ¤íŠ¸ rowì˜ ê°¯ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”. ");
 				//num_of_rand=scan.nextInt();
-				//System.out.println("¸î°³ÀÇ Å×½ºÆ®¼ÂÀ» »ı¼ºÇÒ Áö °³¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				//System.out.println("ëª‡ê°œì˜ í…ŒìŠ¤íŠ¸ì…‹ì„ ìƒì„±í•  ì§€ ê°œìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 				//num_of_set=scan.nextInt();
 				num=new int[num_of_rand];
 				target_sel=new boolean[num_of_rand][6];
